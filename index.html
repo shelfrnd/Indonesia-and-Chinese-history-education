@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Two Gates — Schooling in China and Indonesia</title>
+  <meta name="description" content="An AI-assisted historical inquiry into whether mass schooling in China and Indonesia replaced older gates of selection.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,560;0,6..72,680;1,6..72,460&family=Outfit:wght@380;500;640&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4efe4;
+      --paper-2: #fbf7f0;
+      --ink: #1c1712;
+      --ink-soft: #4a433a;
+      --rule: #d9cfc0;
+      --cinnabar: #8e2a24;
+      --cinnabar-deep: #6e1d19;
+      --indigo: #1d3554;
+      --indigo-soft: #e7eef5;
+      --brass: #8a5a16;
+      --brass-soft: #f3e6cf;
+      --green: #1d5c3a;
+      --green-soft: #e5f2ea;
+      --shadow: 0 18px 50px rgba(40, 28, 16, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5.6rem; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(142, 42, 36, 0.08), transparent 50%),
+        radial-gradient(900px 420px at 110% 8%, rgba(29, 53, 84, 0.08), transparent 46%),
+        var(--paper);
+      font-family: "Newsreader", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+      font-size: 1.12rem;
+      line-height: 1.55;
+    }
+
+    a { color: var(--cinnabar-deep); }
+    a:hover { color: var(--cinnabar); }
+    :focus-visible {
+      outline: 2px solid var(--indigo);
+      outline-offset: 3px;
+    }
+
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      background: var(--ink);
+      color: white;
+      padding: 0.5rem 0.8rem;
+      z-index: 10;
+    }
+    .skip:focus { top: 0.6rem; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 4vw;
+      background: rgba(244, 239, 228, 0.92);
+      border-bottom: 1px solid var(--rule);
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      font-family: Outfit, "Avenir Next", sans-serif;
+      font-weight: 640;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .brand span { color: var(--cinnabar); }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.9rem;
+      justify-content: flex-end;
+    }
+    nav a {
+      font-family: Outfit, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink-soft);
+    }
+    nav a:hover { color: var(--cinnabar); }
+
+    header.hero {
+      padding: 4.2rem 4vw 2.2rem;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .kicker {
+      font-family: Outfit, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cinnabar);
+      margin: 0 0 1rem;
+    }
+    h1 {
+      font-weight: 560;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 0 0 1.2rem;
+      max-width: 16ch;
+    }
+    .lede {
+      max-width: 42rem;
+      font-size: 1.28rem;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    .compare {
+      max-width: 1180px;
+      margin: 0.5rem auto 0;
+      padding: 0 4vw 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .compare article {
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      padding: 1.1rem 1.2rem 1rem;
+      box-shadow: var(--shadow);
+    }
+    .compare h2 {
+      font-family: Outfit, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 0.45rem;
+    }
+    .compare .china h2 { color: var(--cinnabar); }
+    .compare .indo h2 { color: var(--indigo); }
+    .compare p { margin: 0; font-size: 1.02rem; }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 4vw 4rem;
+    }
+
+    section {
+      padding: 2.4rem 0 0.4rem;
+      border-top: 1px solid var(--rule);
+      scroll-margin-top: 5.6rem;
+    }
+    .sec-label {
+      font-family: Outfit, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin: 0 0 0.4rem;
+    }
+    h3 {
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      font-weight: 560;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.9rem;
+      line-height: 1.15;
+    }
+    .prose { max-width: 44rem; }
+    .prose p { margin: 0 0 0.95rem; }
+    .question-box {
+      background: var(--ink);
+      color: #f6f1e7;
+      padding: 1.4rem 1.5rem;
+      max-width: 46rem;
+    }
+    .question-box p {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+      line-height: 1.28;
+    }
+
+    .prompt {
+      background: var(--paper-2);
+      border-left: 4px solid var(--indigo);
+      padding: 1rem 1.15rem;
+      margin: 0 0 1.2rem;
+      max-width: 46rem;
+    }
+    .prompt .who {
+      font-family: Outfit, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--indigo);
+      margin: 0 0 0.4rem;
+    }
+    .prompt p { margin: 0; font-style: italic; }
+
+    .claims {
+      display: grid;
+      gap: 0.8rem;
+      max-width: 46rem;
+    }
+    .claim {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.8rem;
+      align-items: start;
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      padding: 0.9rem 1rem;
+    }
+    .claim b {
+      font-family: Outfit, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--cinnabar);
+    }
+
+    .evidence {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+    .card {
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      padding: 1.05rem 1.1rem 0.95rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .card .tag {
+      font-family: Outfit, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--indigo);
+      margin: 0 0 0.35rem;
+    }
+    .card h4 {
+      margin: 0 0 0.45rem;
+      font-size: 1.22rem;
+      font-weight: 560;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .card p { margin: 0 0 0.7rem; color: var(--ink-soft); font-size: 1.02rem; }
+    .card a {
+      margin-top: auto;
+      font-family: Outfit, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    .timeline {
+      margin-top: 1.1rem;
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 7.2rem 1fr 1fr;
+      gap: 0.8rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.98rem;
+    }
+    .row strong {
+      font-family: Outfit, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+    .row .muted { color: var(--ink-soft); }
+    .place {
+      display: block;
+      font-family: Outfit, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .place.china { color: var(--cinnabar); }
+    .place.indo { color: var(--indigo); }
+
+    .audit {
+      display: grid;
+      gap: 0.75rem;
+    }
+    .verdict {
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      padding: 1rem 1.1rem;
+    }
+    .pill {
+      display: inline-block;
+      font-family: Outfit, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.5rem;
+      border-radius: 999px;
+      margin-bottom: 0.45rem;
+    }
+    .supported { background: var(--green-soft); color: var(--green); }
+    .broad { background: var(--brass-soft); color: var(--brass); }
+    .misleading { background: #f8e4e1; color: var(--cinnabar-deep); }
+    .unsupported { background: #eceae6; color: var(--ink); }
+    .verdict h4 { margin: 0 0 0.4rem; font-size: 1.18rem; font-weight: 560; }
+    .verdict p { margin: 0; color: var(--ink-soft); }
+
+    .final {
+      background: var(--indigo);
+      color: #f4f7fb;
+      padding: 1.5rem 1.4rem 1.2rem;
+      max-width: 48rem;
+    }
+    .final p { margin: 0 0 0.85rem; }
+    .final a { color: #f0c9c4; }
+
+    .mind {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+    .mind article {
+      border-top: 3px solid var(--cinnabar);
+      padding-top: 0.7rem;
+    }
+    .mind h4 { margin: 0 0 0.35rem; font-size: 1.15rem; }
+    .mind p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.5rem 4vw 3rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--rule);
+    }
+    footer ol { padding-left: 1.2rem; }
+    footer li { margin: 0.35rem 0; }
+
+    @media (max-width: 860px) {
+      .compare, .evidence, .mind, .row { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      nav { justify-content: flex-start; }
+      h1 { max-width: none; }
+      .row strong { margin-bottom: -0.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#question">Skip to the inquiry</a>
+  <div class="topbar">
+    <a class="brand" href="#top">Two Gates <span>·</span> China &amp; Indonesia</a>
+    <nav aria-label="Required sections">
+      <a href="#question">01 Question</a>
+      <a href="#why">02 Why</a>
+      <a href="#ai">03 AI</a>
+      <a href="#evidence">04 Evidence</a>
+      <a href="#audit">05 Audit</a>
+      <a href="#interpretation">06 Interpretation</a>
+      <a href="#changed">07 Changed</a>
+    </nav>
+  </div>
+
+  <header class="hero" id="top">
+    <p class="kicker">Chinese history · AI-assisted historical inquiry</p>
+    <h1>Two gates, two school systems.</h1>
+    <p class="lede">A comparison of education in China and Indonesia only works if it is a historical question. The pages below ask that question, record what an AI said first, and then keep only the parts the sources can carry.</p>
+  </header>
+
+  <div class="compare" aria-label="Opening contrast">
+    <article class="china">
+      <h2>China</h2>
+      <p>An empire that selected officials by classical examinations until 1905, then a republic and a socialist state that rebuilt schools — and, in 1977, put a national college exam back at the center.</p>
+    </article>
+    <article class="indo">
+      <h2>Indonesia</h2>
+      <p>Islamic boarding schools older than the republic, a thin Dutch colonial school ladder, then a huge public primary-school drive — while madrasah and pesantren stayed inside the national system.</p>
+    </article>
+  </div>
+
+  <main>
+    <section id="question">
+      <p class="sec-label">01 · Historical question</p>
+      <h3>A question that can be argued</h3>
+      <div class="question-box">
+        <p>When China and Indonesia expanded mass schooling, did they replace older forms of selection, or did the examination in China and the divide between state schools and Islamic schools in Indonesia keep deciding who gets ahead?</p>
+      </div>
+      <div class="prose" style="margin-top:1rem">
+        <p>This is a question about continuity. “Education in China and Indonesia” is only a topic. The debatable claim hiding inside it is that today’s schools are new doors opened by modern states. The rival claim is that each state rebuilt a gate it already knew: a ranked exam in China, and a split school map in Indonesia.</p>
+        <p>The inquiry stops at those two gates. It does not try to rank the whole culture of either country, and it treats Hong Kong, Macao, and Taiwan as separate school histories.</p>
+      </div>
+    </section>
+
+    <section id="why">
+      <p class="sec-label">02 · Why I chose it</p>
+      <h3>What I assumed before I checked</h3>
+      <div class="prose">
+        <p>I chose this because I already live inside one of the systems. In Indonesia, China is often described in one sentence: students work harder, the gaokao is fierce, and that fierceness comes from Confucius. Indonesia, in the same conversation, is the country that “does not take school seriously.” I wanted a Chinese-history question that could test that sentence, because a stereotype is not a cause.</p>
+        <p>My first assumption was simple. China, I thought, had kept a fair meritocracy running from the imperial examinations to the gaokao, and that continuity explained high scores. Indonesia, I thought, had inherited a damaged colonial system, split by religion, and had never built a real national exam. If that were true, the comparison would already be finished. The rest of this page is the check on that assumption.</p>
+      </div>
+    </section>
+
+    <section id="ai">
+      <p class="sec-label">03 · What AI told me</p>
+      <h3>The prompt, and four claims I took from the answer</h3>
+      <div class="prompt">
+        <p class="who">Prompt given to the AI</p>
+        <p>“Explain the education systems of China and Indonesia as history. Is China’s system a modern version of the imperial examination, and is Indonesia’s weaker because it has no single exam tradition and is divided by religion? Which system gives students a fairer chance, and what do international test scores prove?”</p>
+      </div>
+      <div class="prose">
+        <p>The first answer was confident and tidy. It treated both countries as lessons with a moral. These are the four claims I pulled out of it, in the order I later checked them.</p>
+      </div>
+      <div class="claims">
+        <article class="claim">
+          <b>C1</b>
+          <p>Both states made basic schooling a national project in the late twentieth century: China by law in 1986, Indonesia by building primary schools and then requiring nine years of basic education.</p>
+        </article>
+        <article class="claim">
+          <b>C2</b>
+          <p>The gaokao is the imperial examination continued. Chinese schooling is therefore one fair meritocracy from the Sui and Tang dynasties to the present.</p>
+        </article>
+        <article class="claim">
+          <b>C3</b>
+          <p>Indonesia falls behind because religion split the schools, and because the country never developed a serious national examination.</p>
+        </article>
+        <article class="claim">
+          <b>C4</b>
+          <p>PISA scores settle the history. China leads the world and Indonesia sits near the bottom, so the Chinese model is simply the better system.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="evidence">
+      <p class="sec-label">04 · Evidence trail</p>
+      <h3>Six sources, each linked</h3>
+      <div class="prose">
+        <p>I used these to test the claims one sentence at a time. A source can support the fact of an exam or a school law and still fail to support the story wrapped around it.</p>
+      </div>
+      <div class="evidence">
+        <article class="card">
+          <p class="tag">E1 · China, 650–1905</p>
+          <h4>The civil examinations were central, and they were not an open ladder.</h4>
+          <p>Benjamin Elman dates the examination’s central place in political and intellectual life from about 650 to 1905. The court and reformers ended it in 1904–05. He also argues it was not a wide road for ordinary people: peasants, traders, and artisans, about 90 percent of the population, were not a significant part of the candidates who sat the local tests. The exams circulated elites. They did not empty the social hierarchy.</p>
+          <a href="https://www.princeton.edu/~elman/documents/Civil%20Service%20Examinations.pdf">Elman, “Civil Service Examinations” (Princeton PDF)</a>
+        </article>
+        <article class="card">
+          <p class="tag">E2 · China, 1966–1986</p>
+          <h4>The modern exam was broken, then rebuilt beside a new school law.</h4>
+          <p>China Daily’s chronology says the gaokao was suspended during the Cultural Revolution (1966–76) and resumed in November 1977, when 5.7 million people sat and about 270,000 entered college. A national education chronology records the Compulsory Education Law of 12 April 1986, which established nine-year compulsory education. Those two facts sit side by side: an exam culture returned, and a mass school system was written into law. One does not dissolve the other.</p>
+          <a href="https://www.chinadaily.com.cn/a/202106/28/WS60d926f2a310efa1bd65e481.html">China Daily, “Investing in the future” (2021)</a>
+        </article>
+        <article class="card">
+          <p class="tag">E3 · China, access</p>
+          <h4>Where a student is registered changes the exam.</h4>
+          <p>An OECD snapshot of Chinese education describes the hukou, the household-registration system formalized in 1958, as a barrier to school. It cites an estimate that only about 30 percent of migrant children in Shenzhen and Beijing attended state schools in the early 2010s. It also reports that from 2009 to 2014, 97 percent of China’s poorest counties sent no students to Tsinghua University, and that a Shanghai hukou made a student 53 times more likely than the national average to enter Fudan University. Provincial quotas mean the gaokao is national in name and local in odds.</p>
+          <a href="https://www.oecd.org/content/dam/oecd/en/about/programmes/edu/pisa/publications/national-reports/pisa-2015/Education-in-China-a-snapshot.pdf">OECD, Education in China: A Snapshot</a>
+        </article>
+        <article class="card">
+          <p class="tag">E4 · Indonesia, 1973–78</p>
+          <h4>The state really did open primary school, at enormous scale.</h4>
+          <p>Esther Duflo studied the Sekolah Dasar INPRES program. Between 1973 and 1978 the government built more than 61,000 primary schools, using oil revenue and allocating them by the number of children not yet enrolled. Her finding was that each school built per 1,000 children raised average years of schooling. Mass access in Indonesia is a documented historical event, not a slogan.</p>
+          <a href="https://www.aeaweb.org/articles?id=10.1257/aer.91.4.795">Duflo, American Economic Review (2001)</a>
+        </article>
+        <article class="card">
+          <p class="tag">E5 · Indonesia, the second path</p>
+          <h4>Islamic schools were negotiated into the system, not left outside it.</h4>
+          <p>Bazzi, Hilmy, and Marx trace a dual system older than the New Order. Pesantren reach back centuries. Madrasah, day schools with a heavier religious curriculum, grew from the early 1900s. After 1945 the Ministry of Education ran a secular national system, while the Ministry of Religious Affairs watched the Islamic schools. Suharto’s government tried to pull madrasah under the education ministry and failed. A 1975 compromise left them with the religious-affairs ministry and, later, gave their graduates standing beside secular-school graduates. Law No. 20 of 2003 then named pesantren and diniyah schools as recognized religious education.</p>
+          <a href="https://www.bu.edu/econ/files/2021/06/Islam-and-the-State-Religious-Education.pdf">Bazzi, Hilmy, and Marx, working paper (open PDF)</a>
+        </article>
+        <article class="card">
+          <p class="tag">E6 · Tests, used carefully</p>
+          <h4>The score gap is real. The map of the gap is smaller than “China.”</h4>
+          <p>In PISA 2018, students in Beijing, Shanghai, Jiangsu, and Zhejiang scored 591 in mathematics and 555 in reading. Indonesian students scored 379 and 371. That is a large gap among the students tested. The OECD also states that those four Chinese provinces could not collect PISA 2022 data because schools were closed. Indonesia did test in 2022 and scored 366 in mathematics and 359 in reading, below the OECD averages of 472 and 476. A second Indonesian fact belongs here: in 2020 the education minister described the Ujian Nasional as a format being replaced, from 2021, by a national assessment of literacy, numeracy, and school conditions. Indonesia had a high-stakes national exam. It then turned away from that format.</p>
+          <a href="https://www.oecd.org/en/publications/pisa-2022-results-volume-ii_a97db61c-en/full-report/component-7.html">OECD on who was in PISA 2022</a>
+        </article>
+      </div>
+
+      <div class="timeline" aria-label="Short comparative timeline">
+        <div class="row">
+          <strong>Before 1900</strong>
+          <div><span class="place china">China</span>Civil examinations on the classical canon select officials. Elman: elite circulation, not mass mobility.</div>
+          <div class="muted"><span class="place indo">Indonesia</span>Pesantren teach Islamic learning. Dutch rule later adds a racially tiered colonial ladder for a much smaller group of children.</div>
+        </div>
+        <div class="row">
+          <strong>1905 / 1945</strong>
+          <div><span class="place china">China</span>Examinations abolished, 1905. A modern school system is built, interrupted, and rebuilt through war and revolution.</div>
+          <div class="muted"><span class="place indo">Indonesia</span>Independence, 1945. Leaders choose a state secular system and argue, unresolved, about the place of Islamic schools.</div>
+        </div>
+        <div class="row">
+          <strong>1966–1986</strong>
+          <div><span class="place china">China</span>Cultural Revolution suspends the college exam. Gaokao returns in 1977. Nine-year compulsory education becomes law in 1986.</div>
+          <div class="muted"><span class="place indo">Indonesia</span>New Order expands public primary schools: about 61,000 INPRES schools, 1973–78. The 1975 compromise keeps madrasah under the Ministry of Religious Affairs.</div>
+        </div>
+        <div class="row">
+          <strong>2003–2021</strong>
+          <div><span class="place china">China</span>Hukou and provincial quotas still change who can sit where, and who reaches elite universities. In 2021 the state tries to cut homework and for-profit tutoring in compulsory grades.</div>
+          <div class="muted"><span class="place indo">Indonesia</span>Law 20/2003 locks in the national system and recognizes religious schooling. The old national-exam format is replaced in 2021 by Asesmen Nasional.</div>
+        </div>
+      </div>
+      <p class="prose" style="margin-top:0.8rem;color:var(--ink-soft);font-size:0.98rem">Further links for the last row: <a href="https://www.edu.cn/dsj_8429/20090909/t20090909_406108_2.shtml">PRC education chronology, 1977 and 1986</a>, <a href="https://jdih.kemenkeu.go.id/api/download/FullText/2003/20TAHUN2003UU.htm">Undang-Undang No. 20 Tahun 2003</a>, <a href="https://setkab.go.id/tak-hanya-gantikan-un-mendikbud-asesmen-nasional-penanda-perubahan-paradigma-evaluasi-pendidikan/">Cabinet Secretariat on Asesmen Nasional, 2020</a>, <a href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/11/pisa-2022-results-volume-i-and-ii-country-notes_2fca04b9/indonesia_0e09c072/c2e1ae0e-en.pdf">OECD Indonesia PISA 2022 note</a>.</p>
+    </section>
+
+    <section id="audit">
+      <p class="sec-label">05 · AI audit</p>
+      <h3>What the answer got right, stretched, or bent</h3>
+      <div class="prose">
+        <p>Each claim is judged with the course’s words: supported, too broad, misleading, or unsupported. A true detail can still be attached to a false story.</p>
+      </div>
+      <div class="audit">
+        <article class="verdict">
+          <span class="pill supported">C1 · Supported</span>
+          <h4>Mass schooling was a state project in both countries.</h4>
+          <p>The dates hold. China’s Compulsory Education Law of 1986 set nine years. Indonesia’s INPRES schools, more than 61,000 of them in 1973–78, were a deliberate expansion of access, later written into the national system by Law 20/2003, which requires basic education for ages 7 to 15. This claim describes policy. It does not yet describe who benefits.</p>
+        </article>
+        <article class="verdict">
+          <span class="pill broad">C2 · Too broad</span>
+          <h4>The gaokao inherits an exam ideal. It does not inherit a fair, unbroken meritocracy.</h4>
+          <p>There is a real cultural line: one ranked exam, public and decisive, that is supposed to see talent apart from birth. That line runs through the imperial exams and the gaokao. The rest of the claim overreaches. The institution was abolished in 1905. It was suspended again from 1966 to 1977, when recommendation replaced open exams. Today’s paper tests a modern school curriculum, not the Confucian canon. And Elman’s evidence blocks the word “fair” even for the old system. The OECD hukou figures block it for the new one. Family registration, province, and the money to prepare all sit in front of the exam hall. The 2021 “double reduction” policy — an attempt to cut homework and ban for-profit tutoring in core subjects during compulsory school — is itself evidence that the state sees the race as distorted by private spending. The claim is a useful half-truth stretched into a legend.</p>
+        </article>
+        <article class="verdict">
+          <span class="pill misleading">C3 · Misleading</span>
+          <h4>Indonesia has a divided school map. That is not the same as “no exam” and “religion caused failure.”</h4>
+          <p>The divide is historical and it is specific. Pesantren and madrasah were not a late add-on. The state tried to absorb them and, in 1975, compromised. Law 20/2003 keeps them in the national picture under rules for religious education. Calling that split the cause of weak learning skips the public system the state did build, and it treats millions of religious-school students as a defect rather than as a political settlement. The exam half of the claim is simply off. Indonesia ran a high-stakes national exam, the Ujian Nasional, for years. The 2020 policy was to replace that format because it rewarded memory and burdened students, not because the country had never cared about exams. What the sources support instead is a quality problem that survived the building of schools: after decentralization, districts run schools with very unequal capacity. Andrew Rosser’s study of Indonesia’s learning crisis is a better guide to that political story than a sentence about religion.</p>
+        </article>
+        <article class="verdict">
+          <span class="pill misleading">C4 · Misleading</span>
+          <h4>The tested gap is large. It is not a verdict on all of China, and it is not a verdict on the historical question.</h4>
+          <p>PISA 2018 shows a wide difference between Indonesian 15-year-olds and 15-year-olds in four eastern Chinese provinces. Using that table as “China versus Indonesia” is the misleading step. Beijing, Shanghai, Jiangsu, and Zhejiang are rich, urbanized provinces. Rural counties, vocational tracks, and students blocked by hukou are outside that triumph. The OECD’s own note that those provinces collected no 2022 scores is a warning against treating one cycle as a national character. Indonesia’s 2022 note adds a different warning: results there were among the lowest the country has recorded in PISA, so access gains since the 1970s have not settled the question of learning. Scores measure a sample of students at age 15. They do not measure whether an imperial exam was just, or whether a 1975 compromise was wise.</p>
+        </article>
+      </div>
+      <p class="prose" style="margin-top:0.9rem;font-size:0.98rem;color:var(--ink-soft)">Rosser’s open paper, used against C3: <a href="https://riseprogramme.org/sites/default/files/inline-files/Rosser_Political_Economy_Learning_Crisis_Indonesia.pdf">“The Political Economy of the Learning Crisis in Indonesia.”</a> On double reduction, the State Council and Ministry of Education issued the opinion on 24 July 2021; a readable English summary of the 1986-to-present sequence is the China Daily chronology already linked in E2.</p>
+    </section>
+
+    <section id="interpretation">
+      <p class="sec-label">06 · My final interpretation</p>
+      <h3>Two rebuilt gates, not one Asian model</h3>
+      <div class="final">
+        <p>China and Indonesia both used schools to make a nation. That shared fact, which the AI got right, does not make the systems two versions of one tradition. The historical answer to the question is that mass schooling raised the number of children in classrooms and still left an older gate in charge of the last sorting.</p>
+        <p>In China the gate is an examination, restored in 1977 after a real break. The belief behind it is old: a public ranking can stand in for merit. The institution is new, the curriculum is modern, and the chance of reaching the ranking in good shape is tied to hukou, province, and household resources. The zhongkao, the exam at the end of compulsory school, adds a second sort, into academic or vocational senior secondary, which the “one imperial exam” story usually ignores. A student can work with extraordinary discipline and still sit a different contest from a classmate born under a different registration. Merit is the language of the system. Birthplace and money remain part of the procedure.</p>
+        <p>In Indonesia the gate is less a single paper than a map of schools. The republic inherited Islamic institutions that the colonial state never owned, and a colonial habit of educating a narrow group well. Independence did not choose only one of those inheritances. INPRES built a vast public primary system in the name of one language and one nation. The 1975 compromise, confirmed in spirit by the 2003 law, kept a religious path inside the state. Replacing the Ujian Nasional in 2021 removed a harsh individual exam. It did not, by itself, equalize what district schools teach. The learning gap PISA records is a problem of quality and unequal conditions after access had already expanded.</p>
+        <p>So I would not say that China preserved fairness and Indonesia missed it. I would say China concentrated selection into exams and then let registration and wealth decide who meets those exams prepared, while Indonesia spread selection across a public system and a religious system and then struggled to make the public expansion into equal learning. A fairer chance, if the sources are the judge, is not awarded by pointing at a ranking. It would be a system in which the gate a child meets is not already chosen by parents’ registration, district, or the school’s distance from the capital.</p>
+        <p>That answer is narrower than the AI’s, and it is meant to be. It leaves room for later reform in both countries. It also refuses a comforting ending in which one civilization has already solved merit.</p>
+      </div>
+    </section>
+
+    <section id="changed">
+      <p class="sec-label">07 · What changed my mind?</p>
+      <h3>The evidence that complicated the first story</h3>
+      <div class="mind">
+        <article>
+          <h4>Elman, on the old exam</h4>
+          <p>I had treated “examination” as a synonym for fairness. The candidate pool he describes — elites in, most of the population barely present — made the imperial system look like a closed circulation with an open story attached. Continuity with the gaokao suddenly looked like continuity of a belief, not continuity of justice.</p>
+        </article>
+        <article>
+          <h4>1977, not “since Confucius”</h4>
+          <p>The Cultural Revolution break is awkward for a smooth story, which is why it matters. A tradition that can be switched off for a decade and then redesigned is a political choice. The 5.7 million candidates of winter 1977 show how much desire the exam carried. They do not show that the exam never stopped.</p>
+        </article>
+        <article>
+          <h4>Hukou and the provincial quota</h4>
+          <p>The Tsinghua and Fudan figures, as reported by the OECD, were the point where “national exam” stopped meaning “same chance.” A test can be uniform and the route to the test can be uneven. That is the complication I cannot fold back into the first assumption.</p>
+        </article>
+        <article>
+          <h4>INPRES, 1975, and the end of the UN</h4>
+          <p>Indonesia stopped fitting the picture of a country that never tried. Tens of thousands of primary schools, a formal compromise with Islamic education, and a later decision to abandon a memorization exam are three different historical acts. None of them is “people here do not value school.” The PISA gap remains. It now reads as unfinished business after expansion, not as proof that expansion never happened.</p>
+        </article>
+      </div>
+      <div class="prose" style="margin-top:1.1rem">
+        <p>What I believe now is more tangled than what I believed at the start, and that is the result I trust. The AI was a fast way to see the common story. The sources were a way to find the joins in it: 1905, 1966, 1975, 1977, 1986, 2003, 2021. Those years are where the argument actually turns.</p>
+        <p>Limit I should state: I am comparing national designs, not visiting classrooms. Pesantren differ from one another. Provincial gaokao rules change. Some of the sharpest hukou numbers are the OECD’s citations of earlier research, not a census I conducted. PISA is a sample of 15-year-olds in school, weighted toward the provinces China chose to enter. Within those limits, the direction of the evidence is stable enough to revise the AI answer, and not stable enough to declare a winner between two nations.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Sources linked from this page.</strong> Every external claim in the evidence trail points to one of these.</p>
+    <ol>
+      <li>Benjamin A. Elman, “Civil Service Examinations,” summary essay, Princeton University. <a href="https://www.princeton.edu/~elman/documents/Civil%20Service%20Examinations.pdf">PDF</a>.</li>
+      <li>China Daily, “Investing in the future, the evolution of China’s education system,” 28 June 2021. <a href="https://www.chinadaily.com.cn/a/202106/28/WS60d926f2a310efa1bd65e481.html">Article</a>. Parallel chronology: <a href="https://www.edu.cn/dsj_8429/20090909/t20090909_406108_2.shtml">edu.cn, 1977 and 1986</a>.</li>
+      <li>OECD, <em>Education in China: A Snapshot</em>, especially the boxes on gaokao quotas and hukou. <a href="https://www.oecd.org/content/dam/oecd/en/about/programmes/edu/pisa/publications/national-reports/pisa-2015/Education-in-China-a-snapshot.pdf">PDF</a>.</li>
+      <li>Esther Duflo, “Schooling and Labor Market Consequences of School Construction in Indonesia: Evidence from an Unusual Policy Experiment,” <em>American Economic Review</em> 91, no. 4 (2001). <a href="https://www.aeaweb.org/articles?id=10.1257/aer.91.4.795">AER</a>.</li>
+      <li>Samuel Bazzi, Masyhur Hilmy, and Benjamin Marx, “Religion, Education, and the State,” working-paper version. <a href="https://www.bu.edu/econ/files/2021/06/Islam-and-the-State-Religious-Education.pdf">PDF</a>. Published later in the <em>Review of Economic Studies</em>.</li>
+      <li>Undang-Undang Republik Indonesia Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional. <a href="https://jdih.kemenkeu.go.id/api/download/FullText/2003/20TAHUN2003UU.htm">Official text</a>.</li>
+      <li>Sekretariat Kabinet Republik Indonesia, statement of 11 October 2020 on Asesmen Nasional as the replacement framework for the national exam. <a href="https://setkab.go.id/tak-hanya-gantikan-un-mendikbud-asesmen-nasional-penanda-perubahan-paradigma-evaluasi-pendidikan/">setkab.go.id</a>.</li>
+      <li>OECD, PISA 2022 Results, note that Beijing, Shanghai, Jiangsu, and Zhejiang could not collect data. <a href="https://www.oecd.org/en/publications/pisa-2022-results-volume-ii_a97db61c-en/full-report/component-7.html">OECD chapter</a>. Indonesia country note: <a href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/11/pisa-2022-results-volume-i-and-ii-country-notes_2fca04b9/indonesia_0e09c072/c2e1ae0e-en.pdf">PDF</a>. PISA 2018 means used in the text are the published B-S-J-Z and Indonesia scores (mathematics 591 and 379; reading 555 and 371).</li>
+      <li>Andrew Rosser, “The Political Economy of the Learning Crisis in Indonesia,” RISE programme. <a href="https://riseprogramme.org/sites/default/files/inline-files/Rosser_Political_Economy_Learning_Crisis_Indonesia.pdf">PDF</a>.</li>
+    </ol>
+    <p>Method of this page: ask for an initial explanation, open the sources, judge each claim, and leave the revised interpretation in my own words. The visual design is mine. The seven sections follow the course template.</p>
+  </footer>
+</body>
+</html>
